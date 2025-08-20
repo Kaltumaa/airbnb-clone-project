@@ -1,172 +1,154 @@
+# 🏡 Airbnb Clone Project
+
+This repository is for **Pro-Dev Backend** and **Pro-Dev Frontend** courses.  
+It demonstrates both backend and frontend aspects of building an Airbnb Clone application.  
+
+---
+
+## 🌍 Project Overview
+The goal is to create a full-stack accommodation booking system inspired by Airbnb.  
+It allows users to browse listings, view details, book properties, and make payments.  
+
+### Goals
+- Build a scalable backend with APIs, databases, and security.  
+- Design a responsive frontend with consistent UI/UX.  
+- Practice real-world collaboration with defined roles.  
+- Implement DevOps practices with CI/CD pipelines.  
+
+---
+
+# ⚙️ Pro-Dev Backend
+
 ## 👥 Team Roles
-
-Building the Airbnb Clone backend requires collaboration across different roles. Each team member contributes specialized skills to ensure the system is functional, scalable, and reliable.
-
-### Backend Developer
-Responsible for designing and implementing the application’s core logic. They build API endpoints, integrate third-party services, and ensure the backend follows best practices in scalability, performance, and maintainability.  
-
-**Key Responsibilities:**  
-- Implement API endpoints (REST & GraphQL).  
-- Design and maintain database schemas.  
-- Write business logic for bookings, payments, and reviews.  
-- Collaborate with frontend developers for smooth API integration.  
+- **Backend Developer**: Implement APIs, business logic, and database connections.  
+- **Database Administrator (DBA)**: Design schema, optimize queries, ensure data security.  
+- **DevOps Engineer**: Manage deployments, Docker, CI/CD pipelines, monitoring.  
+- **QA Engineer**: Write and run test cases, track bugs, validate functionality.  
+- **Project Manager**: Coordinate tasks, timelines, communication.  
+- **UI/UX Designer**: Provide wireframes and ensure backend supports UI needs.  
+- **Business Analyst**: Gather requirements and align features with goals.  
 
 ---
-
-### Database Administrator (DBA)
-Ensures the database is optimized, secure, and highly available. They design schemas, manage migrations, and optimize queries for performance.  
-
-**Key Responsibilities:**  
-- Design normalized database structures.  
-- Implement indexing and caching strategies.  
-- Monitor and tune query performance.  
-- Ensure data integrity and backups.  
-
----
-
-### DevOps Engineer
-Manages deployment, scalability, and monitoring of the backend services. They automate workflows and maintain CI/CD pipelines to ensure smooth delivery.  
-
-**Key Responsibilities:**  
-- Set up Docker and container orchestration.  
-- Configure CI/CD pipelines for automated testing and deployment.  
-- Monitor application performance and server uptime.  
-- Manage scalability (horizontal/vertical scaling).  
-
----
-
-### QA Engineer
-Validates that all features work as expected and meet quality standards. They write test cases, automate testing processes, and perform manual testing for critical flows.  
-
-**Key Responsibilities:**  
-- Create and execute test cases for APIs.  
-- Perform regression and integration testing.  
-- Identify and document bugs.  
-- Ensure security and performance testing.  
-
----
-
-### Project Manager (from ITRex roles)
-Acts as the bridge between stakeholders and the development team. They ensure the project is on schedule, within scope, and aligned with business goals.  
-
-**Key Responsibilities:**  
-- Define project scope, milestones, and deliverables.  
-- Coordinate between developers, QA, and DevOps.  
-- Track progress and manage risks.  
-- Facilitate communication with stakeholders.  
-
----
-
-### UI/UX Designer (from ITRex roles)
-Even though this project focuses on backend, designers play a role in defining how the frontend will interact with APIs. They help ensure backend endpoints align with user experience needs.  
-
-**Key Responsibilities:**  
-- Provide wireframes and API interaction flows.  
-- Collaborate with backend developers on data needs.  
-- Ensure consistency between frontend design and backend data structures.  
-
----
-
-### Business Analyst (from ITRex roles)
-Analyzes requirements and ensures the backend supports business logic and user needs. They translate business goals into technical tasks.  
-
-**Key Responsibilities:**  
-- Gather and refine requirements.  
-- Translate business processes into backend logic.  
-- Ensure features align with Airbnb’s clone goals.  
-- Collaborate with QA to validate business rules.  
 
 ## ⚙️ Technology Stack
-
-The Airbnb Clone project uses a modern and scalable technology stack to deliver backend services efficiently:
-
-- **Django**: A high-level Python web framework used to build the backend RESTful APIs and handle business logic.  
-- **Django REST Framework (DRF)**: Provides tools to easily create RESTful APIs, handle authentication, and serialize/deserialize data.  
-- **PostgreSQL**: A powerful relational database used for storing structured data such as users, properties, bookings, and reviews.  
-- **GraphQL**: Enables flexible and efficient querying of backend data, allowing clients to request only the data they need.  
-- **Celery**: A task queue used for managing asynchronous tasks, such as sending notifications or processing background jobs.  
-- **Redis**: An in-memory data store used for caching, session management, and supporting Celery tasks.  
-- **Docker**: Provides containerization for consistent development and deployment environments.  
-- **CI/CD Pipelines**: Automates testing, integration, and deployment of code changes to maintain reliability and speed in development.  
+- **Backend Framework**: Django + Django REST Framework (DRF)  
+- **Database**: PostgreSQL  
+- **API**: REST + GraphQL support  
+- **Caching**: Redis  
+- **Task Queue**: Celery  
+- **Containerization**: Docker + Docker Compose  
+- **CI/CD**: GitHub Actions + Deployment Pipeline  
+- **Monitoring**: Prometheus + Grafana  
 
 ---
 
 ## 🗄️ Database Design
-
-The project database is structured around key entities that represent users, listings, and transactions:
-
-- **Users**  
-  - Fields: `id`, `name`, `email`, `password_hash`, `date_joined`  
-  - Relationship: A user can create multiple properties, make bookings, and leave reviews.  
-
-- **Properties**  
-  - Fields: `id`, `title`, `description`, `location`, `price_per_night`  
-  - Relationship: A property belongs to a user (host) and can have multiple bookings and reviews.  
-
-- **Bookings**  
-  - Fields: `id`, `user_id`, `property_id`, `check_in`, `check_out`, `status`  
-  - Relationship: A booking is linked to one user and one property.  
-
-- **Payments**  
-  - Fields: `id`, `booking_id`, `amount`, `payment_method`, `payment_status`  
-  - Relationship: A payment is associated with one booking.  
-
-- **Reviews**  
-  - Fields: `id`, `user_id`, `property_id`, `rating`, `comment`  
-  - Relationship: A review belongs to a user and a property.  
+- **Users** (Profile, Authentication, Roles)  
+- **Properties** (Owner, Location, Pricing, Amenities)  
+- **Bookings** (Check-in/out dates, Guests, Linked to Users & Properties)  
+- **Payments** (Booking reference, Status, Transaction ID)  
+- **Reviews** (User feedback linked to Property & User)  
 
 ---
 
 ## 🛠️ Feature Breakdown
-
-The Airbnb Clone backend supports the following core features:
-
-- **User Management**  
-  Allows users to register, authenticate, and manage their profiles. This ensures secure access to the platform and provides a personalized experience.  
-
-- **Property Management**  
-  Hosts can create, update, and manage property listings. This feature is central to allowing users to discover and book available properties.  
-
-- **Booking System**  
-  Users can book properties, modify booking details, and manage check-in/check-out information. This system ensures that reservations are tracked and managed effectively.  
-
-- **Payment Processing**  
-  Handles financial transactions securely. It ensures that hosts are paid, and users’ bookings are confirmed only after payment is processed.  
-
-- **Review System**  
-  Enables users to leave reviews and ratings for properties they stayed in. Reviews build trust in the platform and guide future guests in their booking decisions.  
-
-- **Data Optimization**  
-  Implements caching, indexing, and query optimization to improve response times and scalability of the application.  
+- **User Management** (Sign-up, Login, JWT auth, Profiles)  
+- **Property Management** (CRUD, images, amenities, search)  
+- **Booking Management** (Check availability, create/cancel booking, notifications)  
+- **Payments** (Integration with Stripe/Flutterwave, refunds, confirmations)  
+- **Reviews** (User can leave reviews with rating + text)  
+- **Data Optimization** (Caching, indexes, async tasks)  
 
 ---
 
 ## 🔐 API Security
-
-Security is crucial for protecting sensitive data and ensuring trust in the platform. The project will implement the following measures:
-
-- **Authentication & Authorization**  
-  Only registered users can access protected endpoints, and permissions ensure users can only perform actions relevant to their role (e.g., host vs guest).  
-
-- **Data Protection**  
-  Passwords are stored securely using hashing algorithms, and sensitive user data is protected through encryption where necessary.  
-
-- **Rate Limiting**  
-  Prevents abuse of APIs by limiting the number of requests per user/IP, helping protect against denial-of-service (DoS) attacks.  
-
-- **Payment Security**  
-  Payment data is processed securely following industry standards (e.g., PCI compliance), ensuring transactions are safe and fraud-resistant.  
+- Authentication with JWT  
+- Authorization with roles (admin, host, guest)  
+- Rate limiting with DRF throttling  
+- Input validation + sanitization  
+- Encrypted payments and secure API calls  
 
 ---
 
 ## 🔄 CI/CD Pipeline
+- **CI**: Linting, unit tests, coverage reports via GitHub Actions  
+- **CD**: Build Docker image → Push to registry → Deploy to staging/production  
+- **Monitoring**: Logging (ELK stack), alerts with Grafana dashboards  
 
-A **CI/CD pipeline** automates the process of integrating new code, running tests, and deploying updates, ensuring faster and more reliable releases.  
+---
 
-- **Continuous Integration (CI):** Automatically tests and validates code changes when developers push to the repository.  
-- **Continuous Deployment (CD):** Deploys successfully tested changes to production or staging environments with minimal manual effort.  
+# 🎨 Pro-Dev Frontend
 
-**Tools for the project:**  
-- **GitHub Actions:** For automating builds, tests, and deployments directly from GitHub.  
-- **Docker:** For containerization, ensuring the app runs consistently across environments.  
-- **Monitoring Tools (optional):** Such as Prometheus or Grafana to track application health post-deployment.  
+## 🎯 UI/UX Design Planning
+
+### Design Goals
+- Create intuitive booking flow  
+- Maintain visual consistency  
+- Ensure mobile responsiveness  
+
+### Key Features
+- Property search + filtering  
+- Detailed property view  
+- Checkout & payment  
+
+### Primary Pages
+| Page | Description |
+|------|-------------|
+| **Property Listing View** | Grid of properties with filters |
+| **Listing Detailed View** | Full details, images, booking form |
+| **Simple Checkout View** | Streamlined payment + confirmation |
+
+---
+
+## ✨ Importance of User-Friendly Design
+A well-designed booking system reduces friction, increases conversion, and improves customer satisfaction.  
+
+---
+
+## 🎨 Figma Design Specifications
+
+**Color Styles**  
+- Primary: `#FF5A5F`  
+- Secondary: `#008489`  
+- Background: `#FFFFFF`  
+- Text: `#222222`  
+- Secondary Text: `#717171`  
+
+**Typography**  
+- Primary Font: Circular, Medium (500), 16px  
+- Headings: Circular, Bold (700), 24–32px  
+- Secondary Text: Circular, Book (400), 14px  
+
+**Why this matters**  
+Identifying design properties ensures the mockup translates into a consistent, professional UI.  
+
+---
+
+## 📋 Project Roles and Responsibilities
+| Role | Responsibilities |
+|------|------------------|
+| Project Manager | Oversees timeline, coordinates team |
+| Frontend Developers | Build UI components, ensure responsiveness |
+| Backend Developers | Build APIs, manage DB, implement logic |
+| Designers | Create mockups, ensure UX consistency |
+| QA/Testers | Write test cases, perform tests, report bugs |
+| DevOps Engineers | Deployment, CI/CD, server infrastructure |
+| Product Owner | Define requirements, prioritize features |
+| Scrum Master | Facilitate agile, remove blockers |
+
+---
+
+## 🧩 UI Component Patterns
+Planned reusable components include:  
+
+- **Navbar**: Logo, search bar, user nav, responsive menu  
+- **Property Card**: Image, details (price, location, rating), favorite button  
+- **Footer**: Site links, company info, social media, copyright  
+
+Each component is designed for **reusability** and **consistency** across the app.  
+
+---
+
+# ✅ Conclusion
+This repository covers **both Pro-Dev Backend and Pro-Dev Frontend requirements**,  
+providing a full-stack perspective on building an Airbnb-style booking application.  
